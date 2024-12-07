@@ -1,5 +1,4 @@
 #include <iostream>
-#include<cstring>
 using namespace std;
 
 class String {
@@ -13,11 +12,7 @@ public:
     void concatenate();
     void palindrome();
     void count();
-    
-
-    void acceptAdditionalString();
 };
-
 
 void String::accept() {
     cout << "Enter the 1st string: ";
@@ -26,183 +21,132 @@ void String::accept() {
     cin >> s2;
 }
 
-void String::acceptAdditionalString() {
-    cout << "Enter the string to check for palindrome: ";
-    cin >> s3;
-}
-
 void String::length() {
     int len1 = 0, len2 = 0;
-    int i;
 
-    for (i = 0; s1[i] != '\0'; i++) {
-        len1++;
-    }
-    cout << "Length of 1st String: " << len1;
+    while (s1[len1] != '\0') len1++;
+    while (s2[len2] != '\0') len2++;
 
-    for (i = 0; s2[i] != '\0'; i++) {
-        len2++;
-    }
-    cout << "Length of 2nd String: " << len2;
+    cout << "Length of 1st String: " << len1 << "\n";
+    cout << "Length of 2nd String: " << len2 << "\n";
 }
 
 void String::copy() {
-    int i;
-   
-    for (i = 0; s2[i] != '\0'; i++) {
+    int i = 0;
+
+    while (s2[i] != '\0') {
         s1[i] = s2[i];
+        i++;
     }
-    s1[i] = '\0'; 
-
-    cout << "1st String after copying from 2nd String: " << s1;
-
-    for (i = 0; s1[i] != '\0'; i++) {
-        s2[i] = s1[i];
-    }
-    s2[i] = '\0'; 
-
-    cout << "2nd String after copying from 1st String: " << s2 ;
+    s1[i] = '\0'; // Null-terminate the copied string
+    cout << "1st String after copying from 2nd String: " << s1 << "\n";
 }
 
 void String::compare() {
-    int i, flag = 0;
-    for (i = 0; s1[i] != '\0' && s2[i] != '\0'; i++) {
+    int i = 0, isEqual = 1;
+
+    while (s1[i] != '\0' && s2[i] != '\0') {
         if (s1[i] != s2[i]) {
-            flag = 1;
+            isEqual = 0;
             break;
         }
+        i++;
     }
 
-    if (flag == 0 && s1[i] == '\0' && s2[i] == '\0') {
-        cout << "Strings are equal." ;
+    if (isEqual && s1[i] == '\0' && s2[i] == '\0') {
+        cout << "Strings are equal.\n";
     } else {
-        cout << "Strings are not equal.";
+        cout << "Strings are not equal.\n";
     }
 }
-
 
 void String::reverse() {
-int len1=0, len2=0;
-while(s1[len1]!='\0')
-{
-len1++;
-}
-for(int i=0;i<len1/2; i++){
-char temp = s1[i];
-s1[i]= s1[len1-i-1];
-s1[len1-i-1]= temp;
-}
-cout<<"Reserved 1st String: "<<s1;
-while(s2[len2]!='\0')
-{
-len2++;
-}
-for(int i=0;i<len2/2; i++){
-char temp = s2[i];
-s2[i]= s2[len2-i-1];
-s2[len2-i-1]= temp;
-}
-cout<<"Reserved 2nd String: "<<s2;
-}
+    int len1 = 0, len2 = 0;
 
+    while (s1[len1] != '\0') len1++;
+    while (s2[len2] != '\0') len2++;
+
+    for (int i = 0; i < len1 / 2; i++) {
+        char temp = s1[i];
+        s1[i] = s1[len1 - i - 1];
+        s1[len1 - i - 1] = temp;
+    }
+
+    for (int i = 0; i < len2 / 2; i++) {
+        char temp = s2[i];
+        s2[i] = s2[len2 - i - 1];
+        s2[len2 - i - 1] = temp;
+    }
+
+    cout << "Reversed 1st String: " << s1 << "\n";
+    cout << "Reversed 2nd String: " << s2 << "\n";
+}
 
 void String::concatenate() {
     int i = 0, j = 0;
 
-    while (s1[i] != '\0') {
-        i++;
-    }
+    while (s1[i] != '\0') i++; // Find the end of s1
 
     while (s2[j] != '\0') {
         s1[i++] = s2[j++];
     }
-    s1[i] = '\0';
+    s1[i] = '\0'; // Null-terminate the concatenated string
 
-    cout << "Concatenated String (1st + 2nd): " << s1;
+    cout << "Concatenated String (1st + 2nd): " << s1 << "\n";
 }
 
 void String::palindrome() {
-    char str3[100],rstr[100];
-    int f=1;
-cout<<"enter a string:";
-cin>>str3;
-int len3=0,i;
-for(i=0;s3[i]='\0';i++)
-{
-len3++;
-}
-int j=len3-1;
-for(i=0;s3[1]='\0';i++)
-{
-rstr[j]=str3[i];
-j--;
-}
-for(i=0,str3[i]='\0' && rstr[i]='\0';i++)
-{
-if(str3[i]!=rstr[i])
-{
-f=0;
-break;
-}
-}
-if(f==1)
-{
-cout<<"string is palindrome";
+    cout << "Enter a string to check for palindrome: ";
+    cin >> s3;
 
-}
+    int len = 0, isPalindrome = 1;
 
+    while (s3[len] != '\0') len++;
 
-void String::count() 
-{
-    int len1 = 0, len2 = 0;
-    while (s1[len1] != '\0') {
-        len1++;
-    }
-    while (s2[len2] != '\0') {
-        len2++;
-    }
-    cout << "Character counts in 1st String:";
-    for (int i = 0; i < len1; i++) {
-        int c = 1; 
-        int flag = 0; 
-
-        for (int j = 0; j < i; j++) {
-            if (s1[i] == s1[j]) {
-         
-         
-                flag = 1; 
-                break;
-            }
-        }
-
-        if (flag == 0) { 
-            for (int j = i + 1; j < len1; j++) {
-                if (s1[i] == s1[j]) {
-                    c++;
-                }
-            }
-            cout << s1[i] << ": " << c ;
+    for (int i = 0; i < len / 2; i++) {
+        if (s3[i] != s3[len - i - 1]) {
+            isPalindrome = 0;
+            break;
         }
     }
-    cout << "Character counts in 2nd String:";
-    for (int i = 0; i < len2; i++) {
-        int c = 1; 
-        int flag = 0; 
 
-        for (int j = 0; j < i; j++) {
-            if (s2[i] == s2[j]) {
-                flag = 1; 
-                break;
-            }
+    if (isPalindrome) {
+        cout << "The string is a palindrome.\n";
+    } else {
+        cout << "The string is not a palindrome.\n";
+    }
+}
+
+void String::count() {
+    cout << "Character counts in 1st String:\n";
+
+    int freq[256] = {0};
+    int i = 0;
+
+    while (s1[i] != '\0') {
+        freq[s1[i]]++;
+        i++;
+    }
+
+    for (i = 0; i < 256; i++) {
+        if (freq[i] > 0) {
+            cout << char(i) << ": " << freq[i] << "\n";
         }
+    }
 
-        if (flag == 0) { 
-            for (int j = i + 1; j < len2; j++) {
-                if (s2[i] == s2[j]) {
-                    c++;
-                }
-            }
-            cout << s2[i] << ": " << c;
+    cout << "Character counts in 2nd String:\n";
+
+    for (i = 0; i < 256; i++) freq[i] = 0; // Reset frequency array
+
+    i = 0;
+    while (s2[i] != '\0') {
+        freq[s2[i]]++;
+        i++;
+    }
+
+    for (i = 0; i < 256; i++) {
+        if (freq[i] > 0) {
+            cout << char(i) << ": " << freq[i] << "\n";
         }
     }
 }
@@ -251,10 +195,10 @@ int main() {
                 str.count();
                 break;
             case 9:
-                cout << "Exiting the program.";
+                cout << "Exiting the program.\n";
                 break;
             default:
-                cout << "Invalid choice! Please try again.";
+                cout << "Invalid choice! Please try again.\n";
         }
     } while (choice != 9);
 
